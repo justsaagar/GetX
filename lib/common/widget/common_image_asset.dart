@@ -5,7 +5,7 @@ import 'package:getx_demo/common/constant/images.dart';
 
 class CommonImageAsset extends StatelessWidget {
   final String? imageName;
-  final BoxFit? fit;
+  final BoxFit fit;
   final double? height;
   final double? width;
   final Color? color;
@@ -14,7 +14,7 @@ class CommonImageAsset extends StatelessWidget {
   const CommonImageAsset(
       {Key? key,
       this.imageName,
-      this.fit,
+      this.fit = BoxFit.fill,
       this.height,
       this.width,
       this.color,
@@ -26,10 +26,21 @@ class CommonImageAsset extends StatelessWidget {
     return isWebImage
         ? CachedNetworkImage(
             imageUrl: imageName!,
-            placeholder: (context, url) =>
-                const CommonImageAsset(imageName: ImageResources.getXImage),
-            errorWidget: (context, url, error) =>
-                const CommonImageAsset(imageName: ImageResources.getXImage),
+            height: 90,
+            width: 80,
+            fit: BoxFit.contain,
+            placeholder: (context, url) => SvgPicture.asset(
+              ImageResources.getXImage,
+              height: 90,
+              width: 80,
+              fit: BoxFit.contain,
+            ),
+            errorWidget: (context, url, error) => SvgPicture.asset(
+              ImageResources.getXImage,
+              height: 90,
+              width: 80,
+              fit: BoxFit.contain,
+            ),
           )
         : imageName!.split('.').last != 'svg'
             ? Image.asset(
@@ -44,6 +55,7 @@ class CommonImageAsset extends StatelessWidget {
                 height: height,
                 width: width,
                 color: color,
+                fit: fit,
               );
   }
 }

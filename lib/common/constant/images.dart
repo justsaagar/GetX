@@ -4,6 +4,7 @@ class ImageResources {
 
   // ---------------------------- Images ---------------------------- //
   static const String getXImage = imagePath + 'getx.svg';
+  static const String backgroundImage = imagePath + 'app_background.svg';
 
   // ---------------------------- Icons ---------------------------- //
 }
